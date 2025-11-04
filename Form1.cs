@@ -23,6 +23,13 @@ namespace ednevnik410b
 
         public void popuni_txt()
         {
+            if (br_reda == tabela.Rows.Count - 1)
+                button6.Enabled = false;
+            else button6.Enabled = true;
+            if (br_reda == 0)
+                button2.Enabled = false;
+            else button2.Enabled = true;
+
             textBox1.Text = tabela.Rows[br_reda][0].ToString();
             textBox2.Text = tabela.Rows[br_reda][1].ToString();
             textBox3.Text = tabela.Rows[br_reda][2].ToString();
@@ -44,6 +51,35 @@ namespace ednevnik410b
         {
             br_reda++;
             popuni_txt();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            br_reda--;
+            popuni_txt();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            br_reda = 0; 
+            popuni_txt();
+        }
+
+        private void button7_Click(object sender, EventArgs e)
+        {
+            br_reda= tabela.Rows.Count-1;
+            popuni_txt();
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            // DODAJ
+            /*
+             *  naredba = insert into osoba
+             *  values textbox1.text +
+             *   ",'"+textbox1.text + "',"
+             *   VALUES('Marko', 'Ilic',...
+             */
         }
     }
 }
