@@ -79,7 +79,18 @@ namespace ednevnik410b
              *  values textbox1.text +
              *   ",'"+textbox1.text + "',"
              *   VALUES('Marko', 'Ilic',...
+             *   INSERT INTO osoba
+             * VALUES('Ime','Prezime','Adresa','1204007123456',
+             * 'aaa@bbb.cc','123',1)
              */
+            string naredba = "INSERT ONTO osoba VALUES('";
+            naredba = naredba + textBox2.Text + "','";
+            naredba = naredba + textBox3.Text + "','";
+            naredba = naredba + textBox4.Text + "','";
+            naredba = naredba + textBox5.Text + "','";
+            naredba = naredba + textBox6.Text + "','";
+            naredba = naredba + textBox7.Text + "',";
+            naredba = naredba + textBox8.Text + ")";
         }
     }
 }
