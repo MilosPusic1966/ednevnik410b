@@ -21,6 +21,13 @@ namespace ednevnik410b
             InitializeComponent();
         }
 
+        public void load_data()
+        {
+            SqlConnection veza = konekcija.povezi();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            tabela = new DataTable();
+            da.Fill(tabela);
+        }
         public void popuni_txt()
         {
             if (br_reda == tabela.Rows.Count - 1)
@@ -39,10 +46,7 @@ namespace ednevnik410b
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410b;Integrated security=true");
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
-            tabela = new DataTable();
-            da.Fill(tabela);
+            load_data();
             br_reda = 0;
             popuni_txt();
         }
@@ -88,12 +92,13 @@ namespace ednevnik410b
             naredba = naredba + textBox6.Text + "','";
             naredba = naredba + textBox7.Text + "',";
             naredba = naredba + textBox8.Text + ")";
-            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410b;Integrated security=true");
+            SqlConnection veza = konekcija.povezi();
             SqlCommand komanda = new SqlCommand(naredba, veza);
             veza.Open();
             komanda.ExecuteNonQuery();
             veza.Close();
-
+            load_data();
+            popuni_txt();
         }
 
         private void button5_Click(object sender, EventArgs e)
@@ -101,14 +106,12 @@ namespace ednevnik410b
             // BRISI
             string naredba = "DELETE FROM osoba WHERE id=" +
                 textBox1.Text;
-            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410b;Integrated security=true");
+            SqlConnection veza = konekcija.povezi();
             SqlCommand komanda = new SqlCommand(naredba, veza);
             veza.Open();
             komanda.ExecuteNonQuery();
             veza.Close();
-            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
-            tabela = new DataTable();
-            da.Fill(tabela);
+            load_data();
             popuni_txt();
         }
     }
