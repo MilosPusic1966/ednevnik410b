@@ -30,19 +30,27 @@ namespace ednevnik410b
         }
         public void popuni_txt()
         {
-            if (br_reda == tabela.Rows.Count - 1)
-                button6.Enabled = false;
+            if (tabela.Rows.Count == 0)
+            {
+                textBox1.Text = "";
+                textBox2.Text = "";
+                textBox3.Text = "";
+                textBox5.Text = "";
+                textBox6.Text = "";
+            }
+            else
+            {
+                textBox1.Text = tabela.Rows[br_reda][0].ToString();
+                textBox2.Text = tabela.Rows[br_reda][1].ToString();
+                textBox3.Text = tabela.Rows[br_reda][2].ToString();
+                textBox4.Text = tabela.Rows[br_reda][3].ToString();
+                textBox5.Text = tabela.Rows[br_reda][4].ToString();
+                textBox6.Text = tabela.Rows[br_reda][5].ToString();
+            }
+            if (br_reda == tabela.Rows.Count - 1) button6.Enabled = false;
             else button6.Enabled = true;
-            if (br_reda == 0)
-                button2.Enabled = false;
+            if (br_reda == 0) button2.Enabled = false;
             else button2.Enabled = true;
-
-            textBox1.Text = tabela.Rows[br_reda][0].ToString();
-            textBox2.Text = tabela.Rows[br_reda][1].ToString();
-            textBox3.Text = tabela.Rows[br_reda][2].ToString();
-            textBox4.Text = tabela.Rows[br_reda][3].ToString();
-            textBox5.Text = tabela.Rows[br_reda][4].ToString();
-            textBox6.Text = tabela.Rows[br_reda][5].ToString();
         }
         private void Form1_Load(object sender, EventArgs e)
         {
@@ -104,13 +112,24 @@ namespace ednevnik410b
         private void button5_Click(object sender, EventArgs e)
         {
             // BRISI
+            if (br_reda == tabela.Rows.Count - 1)
+            {
+                br_reda--;
+            }
             string naredba = "DELETE FROM osoba WHERE id=" +
                 textBox1.Text;
             SqlConnection veza = konekcija.povezi();
             SqlCommand komanda = new SqlCommand(naredba, veza);
-            veza.Open();
-            komanda.ExecuteNonQuery();
-            veza.Close();
+            try
+            {
+                veza.Open();
+                komanda.ExecuteNonQuery();
+                veza.Close();
+            }
+            catch (Exception greska)
+            {
+                MessageBox.Show(greska.GetType().ToString());
+            }
             load_data();
             popuni_txt();
         }
