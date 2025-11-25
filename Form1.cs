@@ -114,5 +114,29 @@ namespace ednevnik410b
             load_data();
             popuni_txt();
         }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            // MENJAJ
+            // UPDATE osoba
+            // SET adresa = 'Cara Dusana',
+            // jmbg = '4444'
+            // WHERE id = 4
+            string naredba = "UPDATE osoba ";
+            naredba = naredba + "SET ime='"+textBox2.Text + "',";
+            naredba = naredba + "prezime='"+textBox3.Text + "',";
+            naredba = naredba + "adresa='"+textBox4.Text + "',";
+            naredba = naredba + "jmbg='"+textBox5.Text + "',";
+            naredba = naredba + "email='"+textBox6.Text + "',";
+            naredba = naredba + "pass='"+textBox7.Text + "'";   
+            naredba = naredba + " WHERE id="+textBox1.Text;
+            SqlConnection veza = konekcija.povezi();
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
+            load_data();
+            popuni_txt();
+        }
     }
 }
