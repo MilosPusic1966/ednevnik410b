@@ -75,15 +75,12 @@ namespace ednevnik410b
         {
             // DODAJ
             /*
-             *  naredba = insert into osoba
-             *  values textbox1.text +
-             *   ",'"+textbox1.text + "',"
-             *   VALUES('Marko', 'Ilic',...
+           
              *   INSERT INTO osoba
              * VALUES('Ime','Prezime','Adresa','1204007123456',
              * 'aaa@bbb.cc','123',1)
              */
-            string naredba = "INSERT ONTO osoba VALUES('";
+            string naredba = "INSERT INTO osoba VALUES('";
             naredba = naredba + textBox2.Text + "','";
             naredba = naredba + textBox3.Text + "','";
             naredba = naredba + textBox4.Text + "','";
@@ -91,6 +88,28 @@ namespace ednevnik410b
             naredba = naredba + textBox6.Text + "','";
             naredba = naredba + textBox7.Text + "',";
             naredba = naredba + textBox8.Text + ")";
+            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410b;Integrated security=true");
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
+
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            // BRISI
+            string naredba = "DELETE FROM osoba WHERE id=" +
+                textBox1.Text;
+            SqlConnection veza = new SqlConnection("Data Source=DESKTOP-6LPEK0P\\SQLEXPRESS;Initial catalog=dnevnik410b;Integrated security=true");
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            veza.Open();
+            komanda.ExecuteNonQuery();
+            veza.Close();
+            SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM osoba", veza);
+            tabela = new DataTable();
+            da.Fill(tabela);
+            popuni_txt();
         }
     }
 }
