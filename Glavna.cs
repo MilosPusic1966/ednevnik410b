@@ -28,5 +28,10 @@ namespace ednevnik410b
             Upisnica prikaz = new Upisnica();
             prikaz.ShowDialog();
         }
+
+        private void Glavna_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

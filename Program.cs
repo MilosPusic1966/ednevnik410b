@@ -16,7 +16,7 @@ namespace ednevnik410b
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Glavna());
+            Application.Run(new Login());
         }
     }
 }

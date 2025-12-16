@@ -99,12 +99,23 @@ namespace ednevnik410b
             naredba = naredba + textBox5.Text + "','";
             naredba = naredba + textBox6.Text + "','";
             naredba = naredba + textBox7.Text + "',";
-            naredba = naredba + textBox8.Text + ")";
+            if (textBox8.Text == "")
+            {
+                naredba = naredba + "0)";
+            }
+            else naredba = naredba + textBox8.Text + ")";
             SqlConnection veza = konekcija.povezi();
             SqlCommand komanda = new SqlCommand(naredba, veza);
-            veza.Open();
-            komanda.ExecuteNonQuery();
-            veza.Close();
+            try
+            {
+                veza.Open();
+                komanda.ExecuteNonQuery();
+                veza.Close();
+            }
+            catch (Exception greska)
+            {
+                MessageBox.Show(greska.GetType().ToString());
+            }
             load_data();
             popuni_txt();
         }
