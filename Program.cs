@@ -16,7 +16,8 @@ namespace ednevnik410b
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Login());
+            Application.Run(new Upisnica());
+
         }
     }
 }
