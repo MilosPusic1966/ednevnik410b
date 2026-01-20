@@ -33,5 +33,24 @@ namespace ednevnik410b
         {
             Application.Exit();
         }
+
+        private void predmetiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sifarnik nova = new sifarnik("predmet");
+            nova.ShowDialog();
+
+        }
+
+        private void skolskeGodineToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sifarnik nova = new sifarnik("skolska_godina");
+            nova.ShowDialog();
+        }
+
+        private void smeroviToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            sifarnik nova = new sifarnik("smer");
+            nova.ShowDialog();
+        }
     }
 }
