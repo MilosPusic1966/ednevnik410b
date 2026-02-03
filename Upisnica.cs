@@ -22,6 +22,7 @@ namespace ednevnik410b
 
         public void popuni_combo()
         {
+            
             comboBox2.SelectedValue = upisnica.Rows[br_reda]["osoba_id"].ToString();
             comboBox3.SelectedValue = upisnica.Rows[br_reda]["odeljenje_id"].ToString();
         }

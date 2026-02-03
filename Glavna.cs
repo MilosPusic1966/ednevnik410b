@@ -25,7 +25,7 @@ namespace ednevnik410b
 
         private void upisniceToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Upisnica prikaz = new Upisnica();
+            upisnica2 prikaz = new upisnica2();
             prikaz.ShowDialog();
         }
 
