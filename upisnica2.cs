@@ -47,7 +47,7 @@ namespace ednevnik410b
                 int broj_sloga = dataGridView1.CurrentRow.Index;
                 comboBox1.SelectedValue = dataGridView1.Rows[broj_sloga].Cells["odeljenje_id"].Value.ToString();
                 comboBox2.SelectedValue = dataGridView1.Rows[broj_sloga].Cells["osoba_id"].Value.ToString();
-                
+                textBox1.Text = dataGridView1.Rows[broj_sloga].Cells["id"].Value.ToString();
             }
         }
 
@@ -64,10 +64,30 @@ namespace ednevnik410b
             gridpopulate();
         }
 
+        private void button2_Click(object sender, EventArgs e)
+        {
+            string naredba = "UPDATE upisnica SET odeljenje_id=" + comboBox1.SelectedValue.ToString();
+            naredba += ", osoba_id = " + comboBox2.SelectedValue.ToString();
+            naredba += " WHERE id =" + textBox1.Text;
+            SqlConnection veza = konekcija.povezi();
+            SqlCommand komanda = new SqlCommand(naredba, veza);
+            try
+            {
+                veza.Open();
+                komanda.ExecuteNonQuery();
+                veza.Close();
+            }
+            catch (Exception greska)
+            {
+                MessageBox.Show(greska.Message);
+            }
+            gridpopulate();
+        }
+
         private void gridpopulate()
         {
             SqlConnection veza = konekcija.povezi();
-            string wrk = "SELECT ime+' '+prezime as ucenik, str(razred)+'-'+indeks as naziv, osoba_id, odeljenje_id FROM upisnica JOIN osoba ON osoba_id = osoba.id JOIN odeljenje ON odeljenje_id=odeljenje.id";
+            string wrk = "SELECT upisnica.id, ime+' '+prezime as ucenik, str(razred)+'-'+indeks as naziv, osoba_id, odeljenje_id FROM upisnica JOIN osoba ON osoba_id = osoba.id JOIN odeljenje ON odeljenje_id=odeljenje.id";
             SqlDataAdapter adapter = new SqlDataAdapter(wrk, veza);
             upisnica = new DataTable();
             adapter.Fill(upisnica);
